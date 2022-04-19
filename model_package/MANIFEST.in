@@ -1,0 +1,24 @@
+include *.txt
+include *.md
+include *.pkl
+recursive-include ./sentiment_model/*
+
+include sentiment_model/datasets/test_v04_17_2022.csv
+include sentiment_model/fitted_model/*
+include sentiment_model/custom_optimizer/*.json
+include sentiment_model/VERSION
+include sentiment_model/config.yml
+include sentiment_model/utilities/*
+
+include ./requirements/requirements.txt
+include ./requirements/test_requirements.txt
+exclude *.log
+exclude *.cfg
+
+exclude ./research_work/*
+exclude ./sentiment_model/datasets/train_v04_17_2022.csv
+exclude ./.tox/*
+exclude ./.git/*
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

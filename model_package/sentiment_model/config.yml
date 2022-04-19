@@ -1,0 +1,36 @@
+package_name: sentiment_model
+
+model_name: classifier_model_v
+zipped_model_name: zipped_model_v
+bert_model_name: small_bert/bert_en_uncased_L-4_H-256_A-4
+optimizer_name: optimizer_v
+
+train_data_file: train_v
+test_data_file: test_v
+data_version: 04_17_2022
+
+
+features_to_drop_tr:
+  - Genre
+  - Title
+features_to_drop_te:
+  - RatingOf5
+feature_col: Review
+target_col: RatingOf5
+
+batch_size: 64
+shuffle_buffer_size: 128
+epochs: 2
+starting_learning_rate: 0.00005
+tf_seed: 0
+
+
+labels:
+  0: Negative
+  1: Neutral
+  2: Positive
+
+encodings:
+  Negative: 0
+  Neutral: 1
+  Positive: 2
