@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 from loguru import logger
 from app.api import api_router
 from app.config import settings, setup_app_logging
+from sentiment_model.utilities.data_manager import zip_unzip_model
 
 
 # setup logging as early as possible
@@ -73,16 +74,20 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 
+def unzip_and_app(app_object: FastAPI = app) -> FastAPI:
+    zip_unzip_model(test=False, zip=False)
+    return app_object
+
+
+app = unzip_and_app()
+
+
 if __name__ == "__main__":
     # Use this for debugging purposes only    
-    from sentiment_model.utilities.data_manager import zip_unzip_model
     import uvicorn
-    
 
     # log level does not follow production api log level since .run is
     # for debugging in development; production api captures INFO level
     # uvicorn logs using Loguru
     logger.warning("Running in development mode.")
-    
-    # zip_unzip_model(test=False, zip=False)
     uvicorn.run(app, host="localhost", port=8001, log_level="debug")
